@@ -2,10 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { RouterModule, Routes } from '@angular/router';
+import { RouteReuseStrategy, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
+import { RouteStrategyService } from './services/route-strategy.service';
 const routes: Routes = [
   // 默认路由
   {
@@ -45,7 +46,9 @@ const routes: Routes = [
     BrowserModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: RouteStrategyService }
+  ],
   bootstrap: [AppComponent],
   exports: [RouterModule]
 })
